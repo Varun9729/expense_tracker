@@ -24,6 +24,8 @@ void main() async {
   final spreadSheet = await gSheets.spreadsheet(_spreadSheetId);
   //fetching worksheet by title
   var sheet = spreadSheet.worksheetByTitle('Worksheet1');
+  //updating a value
+  await sheet!.values.insertValue("Varun", column: 1, row: 1);
   runApp(const MyApp());
 }
 
