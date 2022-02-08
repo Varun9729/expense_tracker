@@ -1,5 +1,6 @@
 import 'package:expense_tracker/button.dart';
 import 'package:expense_tracker/top_card.dart';
+import 'package:expense_tracker/transaction.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,10 +25,15 @@ class _HomePageState extends State<HomePage> {
                   income: '100',
                   expense: '200',
                 ),
+                SizedBox(
+                  height: 12,
+                ),
                 Expanded(
                   child: Container(
-                    // color: Colors.red,
-                    child: Center(child: Text('TRANSACTIONS')),
+                    child: Center(
+                        child: Column(
+                      children: [MyTransaction()],
+                    )),
                   ),
                 ),
                 PlusButton(),
