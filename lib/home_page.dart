@@ -1,3 +1,4 @@
+import 'package:expense_tracker/button.dart';
 import 'package:expense_tracker/top_card.dart';
 import 'package:flutter/material.dart';
 
@@ -29,10 +30,7 @@ class _HomePageState extends State<HomePage> {
                     child: Center(child: Text('TRANSACTIONS')),
                   ),
                 ),
-                Container(
-                  height: 30,
-                  child: Center(child: Text("BUTTON")),
-                ),
+                PlusButton(),
               ],
             ),
           )),
