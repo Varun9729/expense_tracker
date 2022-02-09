@@ -15,12 +15,50 @@ class GoogleSheetsApi {
 }
 ''';
 
+//setting up and connecting to spreadsheet
   static final _spreadSheetId = '1_e6GXXDe8WfX4vwvigp8nJ-AVL-fqUwAqyKbqJWFkns';
   static final _gSheets = GSheets(_credentials);
   static Worksheet? _worksheet;
 
+//varibales to keep track of
+  static int numberOfTransactions = 0;
+  static List<List<dynamic>> currentTransaction = [];
+  static bool loading = true;
+
   Future init() async {
     final spreadSheet = await _gSheets.spreadsheet(_spreadSheetId);
     _worksheet = spreadSheet.worksheetByTitle('Worksheet1');
+    countRows();
+  }
+
+//to count the number of rows in spreadsheet
+  static Future countRows() async {
+    while ((await _worksheet!.values
+            .value(column: 1, row: numberOfTransactions + 1)) !=
+        '') {
+      numberOfTransactions++;
+    }
+    //to know the number of transactions to load
+    loadTransactions();
+  }
+
+//loading the number of transactions from spreadsheet
+  static Future loadTransactions() async {
+    if (_worksheet == null) {
+      return;
+    }
+    for (int i = 1; i < numberOfTransactions; i++) {
+      final String transactionName =
+          await _worksheet!.values.value(column: 1, row: i + 1);
+      final String transactionAmout =
+          await _worksheet!.values.value(column: 2, row: i + 1);
+      final String incomeOrExpense =
+          await _worksheet!.values.value(column: 3, row: i + 1);
+      if (currentTransaction.length < numberOfTransactions) {
+        currentTransaction
+            .add([transactionName, transactionAmout, incomeOrExpense]);
+      }
+      loading = false;
+    }
   }
 }
