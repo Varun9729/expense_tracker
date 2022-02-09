@@ -1,7 +1,18 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class MyTransaction extends StatelessWidget {
-  const MyTransaction({Key? key}) : super(key: key);
+  final String transactionName;
+  final String transactionAmount;
+  final String incomeOrExpense;
+
+  const MyTransaction(
+      {Key? key,
+      required this.transactionName,
+      required this.transactionAmount,
+      required this.incomeOrExpense})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +25,29 @@ class MyTransaction extends StatelessWidget {
         child: Center(
             child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text('TRANSACTION'), Text('\$200')],
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Color(0xff90caf9)),
+                        shape: BoxShape.circle,
+                        color: Color(0xffe3f2fd)),
+                    child: Icon(Icons.attach_money_rounded, size: 20),
+                  ),
+                ),
+                Text(transactionName),
+              ],
+            ),
+            Text((incomeOrExpense == 'Expense' ? '-' : '+') + transactionAmount,
+                style: TextStyle(
+                    color: (incomeOrExpense == 'Expense'
+                        ? Colors.red
+                        : Colors.green)))
+          ],
         )),
       ),
     );
