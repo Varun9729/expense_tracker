@@ -70,7 +70,7 @@ class TopCard extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(25),
+                          padding: EdgeInsets.all(10),
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.red),
