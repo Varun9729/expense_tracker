@@ -16,40 +16,52 @@ class MyTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(15),
-      child: Container(
-        padding: EdgeInsets.only(left: 12, right: 12),
-        color: Color(0xffe3f2fd),
-        height: 50,
-        child: Center(
-            child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xff90caf9)),
-                        shape: BoxShape.circle,
-                        color: Color(0xffe3f2fd)),
-                    child: Icon(Icons.attach_money_rounded, size: 20),
-                  ),
-                ),
-                Text(transactionName),
-              ],
+    return Column(
+      children: [
+        SizedBox(height: 10),
+        Container(
+          decoration: BoxDecoration(
+            color: Color(0xffe3f2fd),
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(
+              color: Color(0xff90caf9),
             ),
-            Text((incomeOrExpense == 'Expense' ? '-' : '+') + transactionAmount,
-                style: TextStyle(
-                    color: (incomeOrExpense == 'Expense'
-                        ? Colors.red
-                        : Colors.green)))
-          ],
-        )),
-      ),
+          ),
+          padding: EdgeInsets.only(left: 12, right: 12),
+          //  color: Color(0xffe3f2fd),
+          height: 60,
+          child: Center(
+              child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Color(0xff90caf9)),
+                          shape: BoxShape.circle,
+                          color: Color(0xffe3f2fd)),
+                      child: Icon(Icons.attach_money_rounded, size: 20),
+                    ),
+                  ),
+                  Text(transactionName),
+                ],
+              ),
+              Text(
+                  (incomeOrExpense == 'Expense' ? '- ' : '+ ') +
+                      '\$' +
+                      transactionAmount,
+                  style: TextStyle(
+                      color: (incomeOrExpense == 'Expense'
+                          ? Colors.red
+                          : Colors.green)))
+            ],
+          )),
+        ),
+      ],
     );
   }
 }
